@@ -1,5 +1,9 @@
 # discord-issue-tracker
 This will be a full stack application. for now its just the back end
+
+https://dbdiagram.io/d/discord-issue-tracker-68031dcf1ca52373f58bd6d2
+
+
 Setup
 ```
     mkdir discord-issue-tracker
@@ -34,7 +38,7 @@ discord-issue-tracker/
     │   └── issues.routes.js
     └── middleware/
         └── auth.js
-        
+
 /api/auth/login CURL tests
 
 success
