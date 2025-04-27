@@ -17,7 +17,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/auth', authRoutes);
-app.use('./api/issues', issueRoutes);
+app.use('/api/issues', issueRoutes);
 
 //test route to check the server
 app.get('/', (req, res) =>{

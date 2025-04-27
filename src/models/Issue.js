@@ -23,7 +23,8 @@ threaded messaging in the front end later (I hope)
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
-const Issue = sequelize.define('Issue', {
+const Issue = sequelize.define('issues', {
+
   id: {
     type: DataTypes.BIGINT, // Unix timestamp as primary key
     primaryKey: true
@@ -62,7 +63,9 @@ const Issue = sequelize.define('Issue', {
     type: DataTypes.ENUM('Open', 'In-Progress', 'Closed', 'Resolved', 'NA'),
     defaultValue: 'Open'
   }
+  
 }, {
+  freezeTableName:true,
   indexes: [
     {
       fields: ['issue_id']

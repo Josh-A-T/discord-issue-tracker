@@ -15,6 +15,8 @@ export default function CreateIssue() {
 
     try {
       const newIssue = {
+        id: Date.now(),
+        issue_id: Date.now(),
         username: "current_user",
         comment,
         comment_media: "",
@@ -22,8 +24,9 @@ export default function CreateIssue() {
         is_pinned: false,
         reply_to: null,
       };
+      console.log('Request payload:', JSON.stringify(newIssue, null, 2));
       const { data } = await apiClient.post("/issues", newIssue);
-      navigate(`/issues/&{data.id}`);
+      navigate(`/issues/${data.id}`);
     } catch (err) {
       setError("Failed to create issue");
     } finally {

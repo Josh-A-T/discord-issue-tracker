@@ -20,8 +20,8 @@ async function resetDatabase() {
     await sequelize.authenticate();
     console.log('Connection to database established');
     
-    await sequelize.query('DROP TABLE IF EXISTS "Issues" CASCADE');
-    await sequelize.query('DROP TABLE IF EXISTS "Users" CASCADE');
+    await sequelize.query('DROP TABLE IF EXISTS "issues" CASCADE');
+    await sequelize.query('DROP TABLE IF EXISTS "users" CASCADE');
     console.log('Dropped all tables');
     
     

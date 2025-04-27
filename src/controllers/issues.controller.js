@@ -40,31 +40,46 @@ const createIssue = async (req, res) => {
     }
   };
 
-const getIssueOrComment = async (req, res) => {
+  const getIssueOrComment = async (req, res) => {
     try {
       const { id } = req.params;
       
-      const item = await Issue.findOne({
-        where: { id }
-      });
-  
+      // First try to find the requested item
+      const item = await Issue.findByPk(id);
       if (!item) {
-        return res.status(404).send({ error: 'Not found' });
+        return res.status(404).send({ error: 'Item not found' });
       }
-  
-      // Load any comments
-      if (!item.reply_to) {
-        const replies = await Issue.findAll({
-          where: { issue_id: item.issue_id, reply_to: { [Op.not]: null } },
-          order: [['id', 'ASC']]
-        });
-        return res.send({ main: item, replies });
+
+      // If it's a comment (has reply_to), return just the comment
+      if (item.reply_to) {
+        return res.send(item);
       }
-      res.send(item);
+
+      // If it's a main issue, get the issue and all its comments
+      const [mainIssue, comments] = await Promise.all([
+        Issue.findByPk(id),
+        Issue.findAll({
+          where: { 
+            issue_id: item.issue_id,
+            id: { [Op.ne]: id } // Exclude the main issue from comments
+          },
+          order: [['id', 'ASC']] // Oldest first
+        })
+      ]);
+
+      res.send({
+        main: mainIssue,
+        comments
+      });
+      
     } catch (error) {
-      res.status(500).send({ error: error.message });
+      console.error('Error in getIssueOrComment:', error);
+      res.status(500).send({ 
+        error: 'Server error',
+        details: error.message 
+      });
     }
-  };
+};
   
   const getIssueThread = async (req, res) => {
     try {
