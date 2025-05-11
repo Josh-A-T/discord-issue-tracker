@@ -37,7 +37,7 @@ sequelize.authenticate()
     .then(() => {
         console.log('Connected to database');
         app.listen(PORT, () => {
-            console.log('Server Running on port ${PORT}');
+            console.log(`Server Running on port ${PORT}`);
         });
     })
     .catch(err => {
