@@ -18,7 +18,9 @@ Install dependencies
 
 ```
 
+
 Folder structure
+```
 discord-issue-tracker/
 ├── .env
 ├── package.json
@@ -28,16 +30,20 @@ discord-issue-tracker/
     │   └── db.js
     ├── models/
     │   ├── index.js
-    │   ├── User.js
-    │   └── Issue.js
+    |   ├── Bugs.js
+    │   ├── Comments.js
+    │   └── Users.js
     ├── controllers/
     │   ├── auth.controller.js
-    │   └── issues.controller.js
+    │   ├── bugs.controller.js
+    │   └── comments.controller.js
     ├── routes/
     │   ├── auth.routes.js
-    │   └── issues.routes.js
+    │   ├── bugs.routes.js
+    │   └── comments.routes.js
     └── middleware/
         └── auth.js
+```
 
 /api/auth/login CURL tests
 
